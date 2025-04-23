@@ -1,0 +1,9 @@
+/* HTMLとBODYに背景画像を設定 */
+html, body {
+  height: 100%;
+  margin: 0;
+  background-image: url('https://t4.ftcdn.net/jpg/03/57/74/97/360_F_357749764_fzoQEh5DfAvQr5bVUvoFSocSEIhKNl1s.jpg'); /* 画像のURL */
+  background-size: cover; /* 画像が全体に広がる */
+  background-position: center center; /* 画像の位置をセンターに */
+  background-attachment: fixed; /* スクロール時に背景画像を固定 */
+}
