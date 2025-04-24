@@ -3,26 +3,24 @@ on:
   push:
     branches: [ main ]
 
+permissions:           # ← ここを追加
+  contents: write       # gh-pages ブランチに push するため
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      # 1) checkout で資格情報を残さない
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
 
-      # 2) Node セットアップ
       - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # 3) 依存とビルド
       - run: npm ci
       - run: npm run build
 
-      # 4) gh-pages にデプロイ
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -30,4 +28,4 @@ jobs:
           publish_dir: ./dist
           publish_branch: gh-pages
           cname: nico-labo.com
-          force_orphan: true     # ← 衝突を防ぐ
+          force_orphan: true
