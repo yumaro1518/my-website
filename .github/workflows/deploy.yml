@@ -1,0 +1,33 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]           # main に push すると自動実行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # ① ソースをチェックアウト
+      - uses: actions/checkout@v4
+
+      # ② Node.js をセットアップ
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20       # プロジェクトの Node バージョンに合わせる
+
+      # ③ 依存パッケージをインストール
+      - run: npm ci
+
+      # ④ 本番ビルド（dist/ 生成）
+      - run: npm run build
+
+      # ⑤ gh-pages ブランチへデプロイ
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}   # 自動で用意されるトークン
+          publish_dir: ./dist                         # ビルド出力先
+          publish_branch: gh-pages
+          cname: nico-labo.com                        # CNAME ファイルも生成
