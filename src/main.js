@@ -8,5 +8,5 @@ import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
 
 const app = createApp(App);
 app.use(router);
-app.use(createBootstrap())   // ← プラグイン登録
+app.use(createBootstrap())   
 app.mount('#app');
