@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import HeaderPart from "./components/Header.vue";
-import FooterPart from "./components/Footer.vue";
+import HeaderPart from "./views/Header.vue";
+import FooterPart from "./views/Footer.vue";
 import { ref, onMounted, onUnmounted } from "vue";
 // import gsap from "gsap";
 

@@ -14,8 +14,4 @@ export default defineConfig({
     },
   },
 });
-// 例：vue.config.js
-module.exports = {
-  publicPath: './',          // ここ！
-  outputDir: 'dist'
-};
+
