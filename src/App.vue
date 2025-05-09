@@ -1,49 +1,77 @@
 <template>
-  <div class="header-position">
-    <HeaderPart />
-    <router-view></router-view>
-  </div>
-  <div class="background-container">
-    <canvas ref="canvas" class="background-canvas"></canvas>
-  </div>
-  <div class="footer-position">
-    <FooterPart />
+  <!-- 1. 初期ローディング -->
+  <LoadingView v-if="loading" />
+
+  <!-- 2. メインレイアウト -->
+  <div v-else class="page">
+    <div class="header-position">
+      <HeaderPart />
+      <router-view />
+      <!-- ルーティング先をここで描画 -->
+    </div>
+
+    <div class="background-container">
+      <canvas ref="canvas" class="background-canvas"></canvas>
+    </div>
+
+    <div class="footer-position">
+      <FooterPart />
+    </div>
   </div>
 </template>
 
 <script>
+import { ref, onMounted, onUnmounted } from "vue";
 import HeaderPart from "./views/Header.vue";
 import FooterPart from "./views/Footer.vue";
-import { ref, onMounted, onUnmounted } from "vue";
-// import gsap from "gsap";
+import LoadingView from "@/components/LoadingView.vue";
 
 export default {
   name: "App",
-  components: {
-    HeaderPart,
-    FooterPart,
-  },
+  components: { HeaderPart, FooterPart, LoadingView },
+
   setup() {
+    /* ---------- Loading 制御 ---------- */
+    const loading = ref(true);
+    onMounted(() => {
+      // ここでは 3 秒だけ遅らせて必ず 1 フレームは表示させる
+      setTimeout(() => {
+        loading.value = false}, 3000);
+    });
+
+    /* ---------- 背景 Canvas 波アニメ ---------- */
     const canvas = ref(null);
-    let ctx, width, height;
-    let time = 0;
+    let ctx,
+      width,
+      height,
+      time = 0;
 
     const waves = [
-      { height: 50, speed: 0.12, frequency: 0.02, rotationSpeed: 0.1, color: "rgba(0, 102, 255, 0.8)", lineWidth: 2 },
-      { height: 30, speed: 0.13, frequency: 0.03, rotationSpeed: 0.2, color: "rgba(0, 153, 255, 0.6)", lineWidth: 1.5 },
-      { height: 20, speed: 0.14, frequency: 0.04, rotationSpeed: 0.3, color: "rgba(0, 204, 255, 0.4)", lineWidth: 1 },
+      {
+        height: 50,
+        speed: 0.12,
+        frequency: 0.02,
+        rotationSpeed: 0.1,
+        color: "rgba(0,102,255,.8)",
+        lineWidth: 2,
+      },
+      {
+        height: 30,
+        speed: 0.13,
+        frequency: 0.03,
+        rotationSpeed: 0.2,
+        color: "rgba(0,153,255,.6)",
+        lineWidth: 1.5,
+      },
+      {
+        height: 20,
+        speed: 0.14,
+        frequency: 0.04,
+        rotationSpeed: 0.3,
+        color: "rgba(0,204,255,.4)",
+        lineWidth: 1,
+      },
     ];
-
-    const initCanvas = () => {
-      const c = canvas.value;
-      if (!c) return;
-      ctx = c.getContext("2d");
-
-      resizeCanvas();
-      window.addEventListener("resize", resizeCanvas);
-
-      animate();
-    };
 
     const resizeCanvas = () => {
       width = window.innerWidth;
@@ -56,37 +84,38 @@ export default {
       ctx.beginPath();
       ctx.strokeStyle = wave.color;
       ctx.lineWidth = wave.lineWidth;
-      ctx.lineJoin = "round";
-      ctx.lineCap = "round";
-
       for (let x = 0; x < width; x += 10) {
-        // らせんの回転を追加
-        const y = height / 2 + Math.sin(x * wave.frequency + time * wave.speed + offset) * wave.height;
-        const xOffset = Math.cos(x * wave.frequency + time * wave.rotationSpeed) * 20; // らせんの振れ幅
-
-        if (x === 0) {
-          ctx.moveTo(x + xOffset, y);
-        } else {
-          ctx.lineTo(x + xOffset, y);
-        }
+        const y =
+          height / 2 +
+          Math.sin(x * wave.frequency + time * wave.speed + offset) *
+            wave.height;
+        const dx =
+          Math.cos(x * wave.frequency + time * wave.rotationSpeed) * 20;
+        x === 0 ? ctx.moveTo(x + dx, y) : ctx.lineTo(x + dx, y);
       }
-
       ctx.stroke();
     };
 
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
-      waves.forEach((wave, index) => drawWave(wave, index * 1.5)); // 波を少しずらして描画
+      waves.forEach((w, i) => drawWave(w, i * 1.5));
       time += 0.05;
       requestAnimationFrame(animate);
     };
 
-    onMounted(initCanvas);
-    onUnmounted(() => {
-      window.removeEventListener("resize", resizeCanvas);
+    onMounted(() => {
+      const c = canvas.value;
+      if (!c) return;
+      ctx = c.getContext("2d");
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+      animate();
     });
 
-    return { canvas };
+    onUnmounted(() => window.removeEventListener("resize", resizeCanvas));
+
+    /* ---------- template へ渡す ---------- */
+    return { loading, canvas };
   },
 };
 </script>
