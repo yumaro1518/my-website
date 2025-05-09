@@ -2,7 +2,7 @@
     <header class="header">
       <div class="header-container">
         <!-- ロゴ -->
-        <h1 class="logo">nico748.rec</h1>
+        <a class="logo" href="/">nico748.rec</a>
   
         <!-- ハンバーガーメニュー -->
         <HamburgerMenu2 />
@@ -48,5 +48,7 @@ export default {
   font-family: "Concert One", sans-serif;
   font-size: 36px;
   font-weight: bold;
+  color: #333;
+  text-decoration: none;
 }
 </style>
