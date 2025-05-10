@@ -16,90 +16,92 @@
 
     <!-- =================== PROFILE =================== -->
     <section class="section section--profile">
-      <header class="section__head">
-        <h1 class="section__title">
+      <header class="section_head">
+        <h1 class="section_title">
           Profile<span class="jp-contents-name">プロフィール</span>
         </h1>
-        <p class="section__lead">
+        <p class="section_lead">
           Here is my profile page with details about me.
         </p>
       </header>
 
-      <div class="section__content">
-        <p>※ここにプロフィールの本文を配置します。</p>
+      <div class="section_content">
+        <div class="profile_card">
+          
+        </div>
       </div>
     </section>
 
     <!-- =================== WORKS =================== -->
     <section class="section section--works">
-      <header class="section__head">
-        <h1 class="section__title">
+      <header class="section_head">
+        <h1 class="section_title">
           Work<span class="jp-contents-name">作品</span>
         </h1>
-        <p class="section__lead">
+        <p class="section_lead">
           Check out my past projects and creative work.
         </p>
       </header>
 
-      <div class="section__content">
+      <div class="section_content">
         <p>※作品ギャラリーやカルーセルをここに。</p>
       </div>
     </section>
 
     <!-- =================== RECORD =================== -->
     <section class="section section--record">
-      <header class="section__head">
-        <h1 class="section__title">
+      <header class="section_head">
+        <h1 class="section_title">
           Record<span class="jp-contents-name">記録</span>
         </h1>
-        <p class="section__lead">
+        <p class="section_lead">
           Here are my personal records and achievements.
         </p>
       </header>
 
-      <div class="section__content">
+      <div class="section_content">
         <p>※記録テーブルなど。</p>
       </div>
     </section>
 
     <!-- =================== QUEST =================== -->
     <section class="section section--quest">
-      <header class="section__head">
-        <h1 class="section__title">
+      <header class="section_head">
+        <h1 class="section_title">
           Quest<span class="jp-contents-name">目標</span>
         </h1>
-        <p class="section__lead">Discover the challenges and goals I pursue.</p>
+        <p class="section_lead">Discover the challenges and goals I pursue.</p>
       </header>
 
-      <div class="section__content">
+      <div class="section_content">
         <p>※目標リストなど。</p>
       </div>
     </section>
 
     <!-- =================== RECOMMEND =================== -->
     <section class="section section--recommend">
-      <header class="section__head">
-        <h1 class="section__title">
+      <header class="section_head">
+        <h1 class="section_title">
           Recs<span class="jp-contents-name">おすすめ</span>
         </h1>
-        <p class="section__lead">Here are some things I highly recommend!</p>
+        <p class="section_lead">Here are some things I highly recommend!</p>
       </header>
 
-      <div class="section__content">
+      <div class="section_content">
         <p>※おすすめアイテム。</p>
       </div>
     </section>
 
     <!-- =================== MONOLOG =================== -->
     <section class="section section--monolog">
-      <header class="section__head">
-        <h1 class="section__title">
+      <header class="section_head">
+        <h1 class="section_title">
           Monolog<span class="jp-contents-name">つぶやき</span>
         </h1>
-        <p class="section__lead">Random thoughts and deep reflections.</p>
+        <p class="section_lead">Random thoughts and deep reflections.</p>
       </header>
 
-      <div class="section__content">
+      <div class="section_content">
         <p>※つぶやき本文。</p>
       </div>
     </section>
@@ -148,7 +150,7 @@ defineOptions({ name: "HomePage" });
   font-size: clamp(1rem, 2.5vw, 1.5rem);
 }
 .Furi rt {
-  font-size: clamp(20px, 4vw, 50px);
+  font-size: clamp(25px, 4vw, 50px);
   font-family: "Concert One", sans-serif;
   font-weight: 850;
   color: #333;
@@ -157,7 +159,7 @@ defineOptions({ name: "HomePage" });
 }
 .Furi h1{
   font-family: "Concert One", sans-serif;
-  font-size: clamp(60px, 12vw, 180px);
+  font-size: clamp(100px, 12vw, 240px);
   display: inline-block;
   animation: fadeIn 3.5s cubic-bezier(0.33, 1, 0.68, 1) forwards;
 }
@@ -169,13 +171,13 @@ defineOptions({ name: "HomePage" });
   padding-top: 35vh; /* 見出し分の余白 */
 }
 
-.section__head {
+.section_head {
   position: absolute;
   top: 12vh;
   left: 3%;
 }
 
-.section__title {
+.section_title {
   font-family: "Concert One", sans-serif;
   font-size: clamp(2.5rem, 10vw, 7rem);
   margin: 0;
@@ -186,13 +188,13 @@ defineOptions({ name: "HomePage" });
   font-style: bold;
   margin-left: 1.5rem;
 }
-.section__lead {
+.section_lead {
   font-size: clamp(1rem, 2.5vw, 1.5rem);
   font-weight: 600;
   margin: 0.4rem 0 0;
 }
 
-.section__content {
+.section_content {
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 3%;
