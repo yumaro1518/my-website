@@ -26,8 +26,21 @@
       </header>
 
       <div class="section_content">
-        <div class="profile_card">
-          
+        <div class="profile_card_left">
+          <BCard
+      class="pretty-card"         
+      title="Card Title"
+      img-src="https://picsum.photos/600/300?image=25"
+      img-alt="Image"
+      img-top
+      tag="article"
+      style="max-width: 20rem"
+    >
+      <b-card-text>
+        Some quick example text …
+      </b-card-text>
+      <BButton href="#" variant="primary">Go somewhere</BButton>
+    </BCard>
         </div>
       </div>
     </section>
@@ -110,11 +123,11 @@
 
 <script setup>
 defineOptions({ name: "HomePage" });
+import { BCard, BButton } from "bootstrap-vue-next";
 </script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display&family=Prompt&family=Concert+One&display=swap");
-
 /* ---------- 基本レイアウト ---------- */
 .page {
   height: 100vh;
