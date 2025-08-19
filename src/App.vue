@@ -34,9 +34,9 @@ export default {
     /* ---------- Loading 制御 ---------- */
     const loading = ref(true);
     onMounted(() => {
-      // ここでは 3 秒だけ遅らせて必ず 1 フレームは表示させる
+      // ここでは 1.5 秒だけ遅らせて必ず 1 フレームは表示させる
       setTimeout(() => {
-        loading.value = false}, 3000);
+        loading.value = false}, 1500);
     });
 
     /* ---------- 背景 Canvas 波アニメ ---------- */
